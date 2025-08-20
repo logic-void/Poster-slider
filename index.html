@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body{
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(to bottom,red,black,blue);
+    }
+    .carousel{
+      width: max(60%,250px);
+      margin: 100px auto 0 auto;
+      display: flex;
+      translate: 0 -50px;
+      opacity: 0;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      anchor-name: --carousel;
+      transition: all 0.5s ease;
+      scroll-snap-type: x mandatory;
+      scroll-marker-group: after;
+      padding-bottom: 1rem;
+      animation: show-carousel 1s linear 0.5s forwards
+    }
+    .carousel:hover{
+      padding-bottom: 2rem;
+      transform: scale(1.1);
+    }
+    .carousel::scroll-marker-group{
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      animation: change-gap 1s linear 0.5s forwards;
+    }
+    .carousel::-webkit-scrollbar{
+      display:none ;
+    }
+    .image::scroll-marker{
+      content: '';
+      width: .8rem;
+      height: .8rem;
+      background: rgb(50,50,50);
+      border-radius: 50%;
+    }
+    .image::scroll-marker:target-current{
+      background: purple;
+    }
+    .carousel::scroll-button(right), .carousel::scroll-button(left){
+      content: '->';
+      opacity: 0;
+      color: white;
+      height: 40px;
+      width:40px;
+      border: none;
+      background: green;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 18px;
+      position: absolute;
+      position-anchor:--carousel ;
+      position-area: right center;
+      translate:-50% 0;
+      animation: move-right-button 1s linear 0.5s forwards;
+      transition: all 0.5s ease;
+    }
+    .carousel::scroll-button(left){
+      translate: -50px 0;
+      content: '<-';
+      position-area: left center;
+      animation: move-left-button 1s linear 0.5s forwards;
+    }
+    .carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled{
+      background: gray;
+      color: black;
+      transform: scale(0.8);
+    }
+    .carousel::scroll-button(right):active, .carousel::scroll-button(left):active{
+      transform: scale(0.5);
+    }
+    .image{
+      border-radius: 5%;
+      width: 100%;
+      scroll-snap-align: center;
+    }
+    @keyframes change-gap{
+      from{gap: 3rem;}
+      to{gap: .5rem;}
+    }
+    @keyframes show-carousel{
+      from{translate:0 -50px; opacity:0;}
+      to{translate:0 0; opacity:1;}
+    }
+    @keyframes move-left-button{
+      from{translate:-50px 0; opacity: 0;}
+      to{translate:30% 0; opacity: 1;}
+    }
+    @keyframes move-right-button{
+      from{translate:50px 0; opacity: 0;}
+      to{translate:-30% 0; opacity: 1;}
+    }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Slider</title>
+</head>
+<body>
+  <div class="carousel">
+    <img src="img1.jpg" alt="1st image" class="image">
+    <img src="img2.jpg" alt="2nd image" class="image">
+    <img src="img3.png" alt="3rd image" class="image">
+    <img src="img4.jpg" alt="4th image" class="image">
+    <img src="img5.jpg" alt="5th image" class="image">
+    <img src="img6.jpg" alt="6th image" class="image">
+    <img src="img7.jpg" alt="7th image" class="image">
+    <img src="img8.jpg" alt="8th image" class="image">
+    <img src="img9.jpg" alt="9th image" class="image">
+    <img src="img10.jpg" alt="10th image" class="image">
+  </div>
+</body>
+</html>
